@@ -8,8 +8,8 @@ import "./style.css";
 class Directory extends Component {
 
   state = {
+    employeeSort: [],
     employees: [],
-    empSort: [],
     search: "",
     sorted: false,
     value: ""
@@ -25,9 +25,9 @@ class Directory extends Component {
       .catch((err) => console.log(err));
   }
 
-  sortEmp = () => {
+  sortEmployees = () => {
     let { employees, search } = this.state;
-    let empSort = employees.filter(sorted => {
+    let employeeSort = employees.filter(sorted => {
       return (
         sorted.name.first.toLowerCase().includes(search.toLowerCase()) ||
         sorted.name.last.toLowerCase().includes(search.toLowerCase()) ||
@@ -35,12 +35,12 @@ class Directory extends Component {
         sorted.location.city.toLowerCase().includes(search.toLowerCase())
       )
     })
-    this.setState({ empSort })
+    this.setState({ employeeSort: employeeSort })
   }
 
-  startSort = event => {
+  initSort = event => {
     this.setState({ search: event.target.value }, () => {
-      this.sortEmp();
+      this.sortEmployees();
       this.setState({ sorted: true });
     });
   };
@@ -52,22 +52,22 @@ class Directory extends Component {
     let { employees } = this.state;
 
     if (event.target.value === "a-z") {
-    const empSort = [...employees].sort(function (a, b) {
+    const employeeSort = [...employees].sort(function (a, b) {
               if (a.name.first < b.name.first) { return -1; }
               if (a.name.first > b.name.first) { return 1; }
               return 0;
     });
-    this.setState({ empSort })
+    this.setState({ employeeSort: employeeSort })
     this.setState({ sorted: true });
   }
 
   if (event.target.value === "z-a") {
-    const empSort = [...employees].sort(function (a, b) {
+    const employeeSort = [...employees].sort(function (a, b) {
               if (a.name.first < b.name.first) { return 1; }
               if (a.name.first > b.name.first) { return -1; }
               return 0;
     });
-    this.setState({ empSort })
+    this.setState({ employeeSort: employeeSort })
     this.setState({ sorted: true });
   }
 
@@ -78,7 +78,7 @@ class Directory extends Component {
     return (
       <div>
         <SortForm value={this.state.value} onChange={this.handleChange} />
-        <SearchForm name="search" startSort={this.startSort} label="Search" />
+        <SearchForm name="search" startSort={this.initSort} label="Search" />
         <div className="row">
      
           {!this.state.sorted ? this.state.employees.map(employee => (
@@ -93,7 +93,7 @@ class Directory extends Component {
             />
 
           ))
-            : this.state.empSort.map(employee => (
+            : this.state.employeeSort.map(employee => (
 
               <EmployeeCard
                 key={employee.id.value}

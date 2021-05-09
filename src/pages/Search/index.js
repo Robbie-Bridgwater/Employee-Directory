@@ -1,7 +1,7 @@
-import "./style.css";
-import React from "react";
-import Container from "../../components/Container/";
 import SearchResults from "../../components/SearchResults/";
+import Container from "../../components/Container/";
+import React from "react";
+import "./style.css";
 
 function Search() {
  return (
