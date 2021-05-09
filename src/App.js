@@ -1,18 +1,23 @@
 import React from "react";
-import Wrapper from "./components/wrapper";
-import searchBody from "./pages/searchBody";
+import Search from "./pages/Search";
+import Wrapper from "./components/Wrapper/wrapper";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <Router>
-      <div>
-          <Wrapper>
-          <Route exact path="/" component={searchBody} />
-          </Wrapper>
-      </div>
-    </Router>
-  );
+    return ( <
+        Router >
+        <
+        div >
+        <
+        Wrapper >
+        <
+        Route exact path = "/"
+        component = { Search }
+        /> <
+        /Wrapper> <
+        /div> <
+        /Router>
+    );
 }
 
 export default App;
